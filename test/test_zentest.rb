@@ -1,13 +1,7 @@
-#!/usr/local/bin/ruby -w
-
 abort "rubinius does not support features required by zentest" if
   defined?(RUBY_ENGINE) && RUBY_ENGINE =~ /rbx/
 
-$TESTING = true
-
-require 'rubygems'
-require 'minitest/autorun'
-
+require 'test/helper'
 # I do this so I can still run ZenTest against the tests and itself...
 require 'zentest' unless defined? $ZENTEST
 
@@ -139,7 +133,7 @@ end
 
 class TestTrueClass; end
 
-class TestZenTest < MiniTest::Unit::TestCase
+class TestZenTest < Test::Unit::TestCase
   def setup
     @tester = ZenTest.new()
   end
@@ -229,7 +223,7 @@ end
   # Accessors & Adders:
 
   def test_initialize
-    refute_nil(@tester, "Tester must be initialized")
+    assert(@tester,"Tester must be initialized")
     # TODO: should do more at this stage
   end
 

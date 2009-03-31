@@ -1,15 +1,7 @@
-#!/usr/local/bin/ruby -w
-
-require 'rubygems'
-require 'minitest/autorun'
-
-require 'stringio'
-
-$TESTING = true
-
+require 'test/helper'
 require 'unit_diff'
 
-class TestUnitDiff < MiniTest::Unit::TestCase
+class TestUnitDiff < Test::Unit::TestCase
 
   def setup
     @diff = UnitDiff.new
