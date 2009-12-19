@@ -18,7 +18,7 @@ Install
  * rubygems
 
 ###Setup
-    sudo gem install grosser-zentest
+    sudo gem install grosser-zentest -s http://gems.github.com
 
 From Source:
     git co git://github.com/grosser/zentest.git && cd zentest
