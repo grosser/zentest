@@ -53,7 +53,7 @@ end
 
 class ZenTest
 
-  VERSION = '4.1.4'
+  VERSION = File.read( File.join(File.dirname(__FILE__),'..','VERSION') ).strip
 
   include ZenTestMapping
 
