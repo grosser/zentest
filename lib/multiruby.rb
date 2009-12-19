@@ -38,6 +38,8 @@ require 'open-uri'
 #     RUBY_URL = url for MRI tarballs
 #     VERSIONS = what versions to install
 #
+#     RUBYOPT is cleared on installs.
+#
 # NOTES:
 #
 # * you can add a symlink to your rubinius build into ~/.multiruby/install
@@ -49,7 +51,7 @@ module Multiruby
   TAGS     = %w(    1_8_6 1_8_7 1_9_1)
   BRANCHES = %w(1_8 1_8_6 1_8_7 trunk)
 
-  VERSIONS = env('VERSIONS', TAGS.join(":")).split(/:/)
+  VERSIONS = env('VERSIONS', TAGS.join(":").gsub(/_/, '.')).split(/:/)
   MRI_SVN  = env 'MRI_SVN',  'http://svn.ruby-lang.org/repos/ruby'
   RBX_GIT  = env 'RBX_GIT',  'git://github.com/evanphx/rubinius.git'
   RUBY_URL = env 'RUBY_URL', 'http://ftp.ruby-lang.org/pub/ruby'
@@ -63,6 +65,8 @@ module Multiruby
   end
 
   def self.build_and_install
+    ENV.delete 'RUBYOPT'
+
     root_dir = self.root_dir
     versions = []
 
@@ -74,7 +78,7 @@ module Multiruby
       rubygem_tarball = File.expand_path rubygems.last rescue nil
 
       Dir.chdir "build" do
-        Dir["../versions/*"].each do |tarball|
+        Dir["../versions/*"].sort.each do |tarball|
           next if tarball =~ /rubygems/
 
           build_dir = File.basename tarball, ".tar.gz"
@@ -108,7 +112,7 @@ module Multiruby
                 run "tar zxf #{rubygem_tarball}" unless test ?d, rubygems
 
                 Dir.chdir rubygems do
-                  run "../ruby ./setup.rb --no-rdoc --no-ri &> ../log.rubygems"
+                  run "../ruby ./setup.rb --no-rdoc --no-ri", "../log.rubygems"
                 end
               end
             end
@@ -189,9 +193,10 @@ module Multiruby
 
   def self.gnu_utils_build inst_dir
     run "autoconf" unless test ?f, "configure"
-    run "./configure --prefix #{inst_dir} &> log.configure" unless test ?f, "Makefile"
-    run "nice make -j4 &> log.build"
-    run "make install &> log.install"
+    run "./configure --enable-shared --prefix #{inst_dir}", "log.configure" unless
+      test ?f, "Makefile"
+    run "(nice make -j4; nice make)", "log.build"
+    run "make install", "log.install"
   end
 
   def self.help
@@ -257,7 +262,7 @@ module Multiruby
   end
 
   def self.rake_build inst_dir
-    run "rake &> log.build"
+    run "rake", "log.build"
     FileUtils.ln_sf "../build/#{File.basename Dir.pwd}", inst_dir
   end
 
@@ -289,7 +294,9 @@ module Multiruby
     root_dir
   end
 
-  def self.run cmd
+  def self.run base_cmd, log = nil
+    cmd = base_cmd
+    cmd += " > #{log} 2>&1" if log
     puts "Running command: #{cmd}"
     raise "ERROR: Command failed with exit code #{$?}" unless system cmd
   end

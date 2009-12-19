@@ -1,3 +1,60 @@
+=== 4.1.4 / 2009-08-07
+
+* 2 minor enhancements:
+
+  * Added ability to prepend file mappings in autotest. (irohiroki)
+  * Switched autodiscover to use Gem.find_files.
+
+* 2 bug fixes:
+
+  * Updated doco for API changes. (David Ruan)
+  * Updated git URL for Rubinius. jbarnette
+
+=== 4.1.3 / 2009-06-23
+
+* 1 bug fix:
+
+  * Fixed rakefile to include seattlerb plugin. release was flubbed
+
+=== 4.1.2 / 2009-06-23
+
+* 1 minor enhancement:
+
+  * multiruby configure now passes --enable-shared to support wilson and friends.
+
+* 2 bug fixes:
+
+  * Delete RUBYOPT in multiruby_setup to avoid catastrophe. dbalatero
+  * Fixed version number munging for tarballs.
+
+=== 4.1.1 / 2009-06-03
+
+* 1 bug fix:
+
+  * some calls to Multiruby.run didn't have logging. fixed (jcoglan)
+
+=== 4.1.0 / 2009-06-03
+
+* 1 major enhancement:
+
+  * Removed all plugins I don't want to maintain anymore. (gem inst autotest-rails)
+
+* 4 minor enhancements:
+
+  * Added #blur to focus.rb to nuke all other test classes
+  * Clear RUBYOPT before installs (balatero)
+  * Removed test/unit include in zentest so we can focus on miniunit
+  * sort versions for builds. (Jens Wille)
+
+* 6 bug fixes:
+
+  * Fixed a stupid bug when running on some versions of bash >= 3.2.x and using '&>' in a system call. (Jens Wille)
+  * Fixed inconsistent test commands in autotest. (jbarnette)
+  * Fixed unit_diff's usage generation when installed as gem. (borior)
+  * Fixed zentest to deal with unnamed classes. (Bill Dortch)
+  * Removed buggy/unused -l support in unit_diff. (borior)
+  * make twice to make it more resilient to makefile parallel bugs
+
 === 4.0.0 / 2009-03-02
 
 * 2 minor enhancements:
