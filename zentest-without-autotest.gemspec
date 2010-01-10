@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
      "test/test_focus.rb",
      "test/test_zentest.rb",
      "test/test_zentest_mapping.rb",
-     "zentest.gemspec"
+     "zentest-without-autotest.gemspec"
   ]
   s.homepage = %q{http://github.com/grosser/zentest}
   s.rdoc_options = ["--charset=UTF-8"]
