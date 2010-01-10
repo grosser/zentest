@@ -18,7 +18,7 @@ Install
  * rubygems
 
 ###Setup
-    sudo gem install grosser-zentest -s http://gems.github.com
+    sudo gem install zentest-without-autotest
 
 From Source:
     git co git://github.com/grosser/zentest.git && cd zentest

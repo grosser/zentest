@@ -50,11 +50,12 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "zentest"
+    gem.name = "zentest-without-autotest"
     gem.summary = "ZenTest, without AutoTest and UnitDiff"
     gem.homepage = "http://github.com/grosser/zentest"
     gem.authors = ["Ryan Davis"]
   end
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler, or one of its dependencies, is not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
