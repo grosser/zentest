@@ -17,7 +17,7 @@ ARGV.each do |spec|
   when "the_usual" then # TODO: update #help
     ARGV.push(*Multiruby::TAGS.map { |v| "mri:tar:#{v.gsub(/_/, '.')}" })
     ARGV << "build" << "update:rubygems"
-    system "multigem install --no-ri --no-rdoc rake minitest ZenTest"
+    system "multigem install --no-ri --no-rdoc rake minitest ZenTest gemcutter rubyforge hoe"
   when "build" then
     Multiruby.build_and_install
   when "clean" then
@@ -59,12 +59,6 @@ ARGV.each do |spec|
     ARGV << "mri:svn:tag:#{$1}:#{$1}" << "build"
   when /mri:tar:(.*)/ then
     Multiruby.fetch_tar $1
-    ARGV << "build"
-  when /rbx:git:current/ then
-    Multiruby.git_clone "#{Multiruby::RBX_GIT}", "rubinius"
-    ARGV << "build"
-  when /rbx:ln:(.*)/ then
-    Multiruby.rbx_ln $1
     ARGV << "build"
   else
     warn "unknown spec #{spec}"
