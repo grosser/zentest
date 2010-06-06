@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{zentest-without-autotest}
-  s.version = "4.2.1"
+  s.version = "4.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Davis"]
-  s.date = %q{2010-01-18}
-  s.executables = ["multiruby", "multigem", "multiruby_setup", "zentest"]
+  s.date = %q{2010-06-06}
+  s.executables = ["multigem", "zentest", "multiruby", "multiruby_setup"]
   s.extra_rdoc_files = [
     "README.markdown"
   ]
@@ -40,11 +40,11 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/grosser/zentest}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{ZenTest, without AutoTest and UnitDiff}
   s.test_files = [
-    "test/test_zentest.rb",
-     "test/helper.rb",
+    "test/helper.rb",
+     "test/test_zentest.rb",
      "test/test_focus.rb",
      "test/test_zentest_mapping.rb"
   ]
